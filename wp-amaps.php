@@ -49,8 +49,8 @@ function wp_amaps_content_init($atts, $content = null) {
     $address = $address ? $address : false;
     $info = $info ? $info : false;
 
-    $str1 = '<div class="wp_amaps" style="weight: '.$w.'; height: '.$h.'"><div id="'.$id.'"><div id="container"></div><div><div>';
-    $str2 = '<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/><script src="http://webapi.amap.com/maps?v=1.3&key=8ef1ddfea330aa3124a11f4aeaac187e"></script><script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script><style type="text/css">.amap-icon img {margin: 0 !important;}.amap-marker-label {border: 2px solid #f5f5f5;background-color: #f5f5f5;padding-right: 20px;}</style><script>var map = new AMap.Map("container", {resizeEnable: true,center: [';
+    $str1 = '<div class="wp_amaps" style="width: '.$w.'; height: '.$h.'"><div id="'.$id.'"style="width:100%;height:100%"><div id="amapcontainer" style="height:100%;width:100%"></div><div><div>';
+    $str2 = '<link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/><script src="https://webapi.amap.com/maps?v=1.3&key=ae6308d90a59b230bcc94b8be231276f"></script><script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script><style type="text/css">.amap-icon img {margin: 0 !important;}.amap-marker-label {border: 2px solid #f5f5f5;background-color: #f5f5f5;padding-right: 20px;}</style><script>var map = new AMap.Map("amapcontainer", {resizeEnable: true,center: [';
     $str3 = '],zoom: 13});var marker = new AMap.Marker({position: map.getCenter()});marker.setMap(map);marker.setTitle("';
     $str4 = '");marker.setLabel({offset: new AMap.Pixel(20, 20),content: "';
     $str5 = '"});</script>';
@@ -62,12 +62,12 @@ function wp_amaps_content_init($atts, $content = null) {
         if($lon && $lat) {
             $output .= $lon.','.$lat;
             if (! $address) {
-                $tep = file_get_contents("http://restapi.amap.com/v3/geocode/regeo?output=json&location=".$lon.",".$lat."&key=71587fdfc4998f07b4ddd25846f193b7&radius=1000");
+                $tep = file_get_contents("https://restapi.amap.com/v3/geocode/regeo?output=json&location=".$lon.",".$lat."&key=ae6308d90a59b230bcc94b8be231276f&radius=1000");
                 $tep = json_decode($tep);
                 $address = $tep->regeocode->formatted_address;
             }
         } else if ($address){
-            $tep = file_get_contents("http://restapi.amap.com/v3/geocode/geo?address=".$address."&output=json&key=71587fdfc4998f07b4ddd25846f193b7");
+            $tep = file_get_contents("https://restapi.amap.com/v3/geocode/geo?address=".$address."&output=json&key=ae6308d90a59b230bcc94b8be231276f");
             $tep = json_decode($tep);
             $tep = $tep->geocodes[0]->location;
             $output .= $tep;
